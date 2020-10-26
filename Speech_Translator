@@ -1,0 +1,27 @@
+"""
+Created on Mon Oct 26 11:21:33 2020
+
+@author: Paul Mugambi
+"""
+
+from translate import Translator                               
+import speech_recognition as sr
+
+
+def Lang():
+    r = sr.Recognizer()
+    print ("Please say your phrase")
+    with sr.Microphone() as source:
+        audio = r.listen(source)                 
+
+ ####Convert speech to text
+    try:
+         print("You said: " + r.recognize_google(audio))    
+         microphone_input  = r.recognize_google(audio) 
+         translator = Translator(to_lang="german")###Translate into German###
+         phrase = translator.translate(microphone_input)
+         print (phrase)
+    except LookupError:                           
+        print("Could not understand audio")
+    
+Lang()
